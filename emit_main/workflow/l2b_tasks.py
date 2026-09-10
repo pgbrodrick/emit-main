@@ -67,6 +67,7 @@ class L2BMineral(SlurmJobTask):
         wm = WorkflowManager(config_path=self.config_path, acquisition_id=self.acquisition_id)
         acq = wm.acquisition
         pge = wm.pges["emit-sds-l2b"]
+        tetra_pge = wm.pges["tetracorder-lite"]
 
         # Build PGE commands to run the tetracorder container
         tmp_data_dir = os.path.join(self.local_tmp_dir, 'data')
@@ -119,7 +120,7 @@ class L2BMineral(SlurmJobTask):
                "-e", f"NUMEXPR_NUM_THREADS={self.n_cores}",
                "-v", f"{tmp_data_dir}:/data",
                "-v", f"{tmp_output_dir}:/output",
-               f"{wm.config['tetracorder_image_name']}:{wm.config['tetracorder_image_tag_name']}",
+               f"{tetra_pge.repo_name}:{tetra_pge.version_tag}",
                "tetrapy", "run", "/data/config.yml",
                "--setup.cores", f"{self.n_cores}"]
 

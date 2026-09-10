@@ -54,7 +54,7 @@ def main():
     results = list(dc_coll.find(query).sort("start_time", 1))
     print("---------------------")
     print(f"Description: Data collections with incomplete frames")
-    print(f"Resolution: Investigate missing frames (python cron/missing_frames.py DCID). If they can't be recovered, "
+    print(f"Resolution: Investigate missing frames (python scripts/missing_frames.py DCID). If they can't be recovered, "
           f"then run the command below.")
     print(f"Command: python run_workflow.py -c config/ops_sds_config.json -d DCID -p l1aframereport --ignore_missing_"
           f"frames")
